@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Convert</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>PDF Convert</h1>
+      <p class="lede">Turn Word documents into PDFs, and PDFs back into editable Word files.</p>
+    </header>
+
+    <div class="tabs" role="tablist">
+      <button role="tab" class="tab active" data-mode="word-to-pdf" aria-selected="true">Word → PDF</button>
+      <button role="tab" class="tab" data-mode="pdf-to-word" aria-selected="false">PDF → Word</button>
+    </div>
+
+    <form id="form" class="card">
+      <label id="drop" class="drop" for="file">
+        <input id="file" type="file" name="file" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="drop-text"><strong>Choose a file</strong> or drag it here</span>
+        <span id="drop-hint" class="hint"></span>
+      </label>
+      <button id="go" type="submit" class="primary" disabled>Convert</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <footer>
+      Files up to {{ max_mb }} MB. Uploads are converted and deleted immediately — nothing is kept.
+    </footer>
+  </main>
+  <script>window.MAX_MB = {{ max_mb }};</script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
